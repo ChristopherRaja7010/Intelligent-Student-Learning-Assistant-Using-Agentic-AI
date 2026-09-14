@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An adaptive student learning assistant powered by an agentic learning workflow.">
+  <title>LearnFlow | Intelligent Student Learning Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">LF</span>
+        <span>LearnFlow</span>
+      </div>
+      <p class="sidebar-caption">Your intelligent learning companion</p>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span>◈</span> Overview</button>
+        <button class="nav-item" data-view="planner"><span>◷</span> Study planner</button>
+        <button class="nav-item" data-view="practice"><span>✦</span> Practice lab</button>
+        <button class="nav-item" data-view="resources"><span>▣</span> Resources</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="mini-profile">
+          <div class="avatar" id="sidebar-avatar">AR</div>
+          <div>
+            <strong id="sidebar-name">Alex Rivera</strong>
+            <span>Learning streak: <b id="sidebar-streak">7</b> days</span>
+          </div>
+        </div>
+        <button class="settings-button" id="reset-data" type="button">↻ Reset demo data</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Monday, September 14, 2026</p>
+          <h1 id="page-title">Good morning, Alex <span class="wave">✦</span></h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="notifications" aria-label="Notifications">♢<span class="notification-dot"></span></button>
+          <button class="profile-chip" id="open-profile"><span class="avatar small" id="top-avatar">AR</span><span id="top-name">Alex Rivera</span><span>⌄</span></button>
+        </div>
+      </header>
+
+      <section class="view active" id="overview-view">
+        <div class="hero-card">
+          <div>
+            <span class="status-pill">● AI coach online</span>
+            <h2>Small steps, <em>big progress.</em></h2>
+            <p>Your learning plan is adapting to your recent quiz results. You have a focused session ready for today.</p>
+            <button class="primary-button" data-view-target="planner">View today's plan <span>→</span></button>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>✦</span><i></i><b></b></div>
+        </div>
+
+        <div class="section-heading">
+          <div><p class="eyebrow">Your learning pulse</p><h2>Progress overview</h2></div>
+          <button class="text-button" data-view-target="practice">View detailed report →</button>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-icon purple">↗</div><span>Weekly progress</span><strong id="weekly-progress">68%</strong><small class="positive">↑ 12% from last week</small><div class="progress-bar"><i id="weekly-bar"></i></div></article>
+          <article class="stat-card"><div class="stat-icon orange">♨</div><span>Learning streak</span><strong><span id="streak-count">7</span> days</strong><small>Best: 14 days</small><div class="streak-dots" id="streak-dots"></div></article>
+          <article class="stat-card"><div class="stat-icon blue">◷</div><span>Study time</span><strong id="study-time">4h 20m</strong><small class="positive">↑ 35m this week</small><div class="mini-chart"><i style="height:45%"></i><i style="height:65%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:62%"></i><i style="height:92%"></i><i style="height:72%"></i></div></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel today-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Monday, Sep 14</p><h2>Today's focus</h2></div><button class="more-button" data-view-target="planner">See full plan →</button></div>
+            <div id="today-tasks" class="task-list"></div>
+          </section>
+          <section class="panel insight-panel">
+            <div class="panel-heading"><div><p class="eyebrow">AI insight</p><h2>Focus recommendation</h2></div><span class="sparkle">✦</span></div>
+            <div class="insight-body"><div class="insight-quote">“</div><p id="insight-text">You are making great progress in Python fundamentals. Spend 25 minutes reviewing <strong>list comprehensions</strong> today to close your biggest knowledge gap.</p></div>
+            <button class="secondary-button" data-view-target="practice">Start recommended practice →</button>
+          </section>
+        </div>
+
+        <section class="panel subjects-panel">
+          <div class="panel-heading"><div><p class="eyebrow">Across your subjects</p><h2>Subject mastery</h2></div><button class="more-button" data-view-target="planner">Manage subjects →</button></div>
+          <div id="subject-list" class="subject-list"></div>
+        </section>
+      </section>
+
+      <section class="view" id="planner-view">
+        <div class="view-intro"><div><p class="eyebrow">Adaptive schedule</p><h2>Your study planner</h2><p>Built from your goals, available time, and latest performance.</p></div><button class="primary-button" id="generate-plan">↻ Rebuild plan</button></div>
+        <div class="planner-layout"><section class="panel"><div class="panel-heading"><div><p class="eyebrow">Today</p><h2>Monday's study blocks</h2></div><span class="status-pill">4 tasks</span></div><div id="planner-tasks" class="planner-tasks"></div></section><section class="panel goals-panel"><div class="panel-heading"><div><p class="eyebrow">Your setup</p><h2>Learning goals</h2></div><button class="text-button" id="edit-goals">Edit</button></div><form id="goals-form"><label>Primary goal<select id="goal-select"><option>Prepare for upcoming exams</option><option>Build practical skills</option><option>Improve assignment performance</option></select></label><label>Daily study time<input id="time-input" type="range" min="30" max="240" step="30" value="90"><span class="range-value" id="time-value">90 minutes</span></label><label>Current focus<input id="focus-input" type="text" value="Python fundamentals"></label><button class="secondary-button" type="submit">Save preferences</button></form></section></div>
+      </section>
+
+      <section class="view" id="practice-view">
+        <div class="view-intro"><div><p class="eyebrow">Active recall</p><h2>Practice lab</h2><p>Test your understanding and let your AI coach tune the next session.</p></div><span class="score-badge"><b id="quiz-score">0</b>/3 completed</span></div>
+        <section class="quiz-card panel" id="quiz-card"><div class="quiz-progress"><span id="question-number">Question 1 of 3</span><div><i id="quiz-progress-bar"></i></div></div><p class="eyebrow">Python fundamentals</p><h2 id="question-text"></h2><div id="answer-options" class="answer-options"></div><div class="quiz-footer"><span id="quiz-feedback"></span><button class="primary-button" id="next-question" disabled>Check answer</button></div></section>
+      </section>
+
+      <section class="view" id="resources-view">
+        <div class="view-intro"><div><p class="eyebrow">Curated for you</p><h2>Learning resources</h2><p>Recommendations selected based on your current focus and progress.</p></div><button class="secondary-button" id="refresh-resources">✦ Refresh recommendations</button></div>
+        <div class="resource-grid" id="resource-grid"></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
